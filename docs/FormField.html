@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>FormField.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="FormField.html">
+                  FormField.js
+                </a>
+              
+                
+                <a class="source" href="FormValueViewer.html">
+                  FormValueViewer.js
+                </a>
+              
+                
+                <a class="source" href="App.html">
+                  App.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>FormField.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormField</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  renderErrors(error, key) {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">{key}</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"help-block"</span>&gt;</span>{error}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    )</span>;
+  }
+  render() {
+    <span class="hljs-keyword">const</span> {type, label, value, handleChange, validations} = <span class="hljs-keyword">this</span>.props;
+    <span class="hljs-keyword">const</span> errors = validations.reduce((acc, validation) =&gt; {
+      <span class="hljs-keyword">if</span> (value &amp;&amp; validation.test(value) === <span class="hljs-literal">false</span>) {
+        acc.push(validation.message);
+      }
+      <span class="hljs-keyword">return</span> acc;
+    }, []);
+    <span class="hljs-keyword">const</span> hasError = errors.length;
+    <span class="hljs-keyword">const</span> classes = [<span class="hljs-string">'form-group'</span>, hasError ? <span class="hljs-string">'has-error'</span> : <span class="hljs-literal">null</span>];
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">{classes.join('</span> ')}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>{label}<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> 
+          <span class="hljs-attribute">className</span>=<span class="hljs-value">"form-control"</span> 
+          <span class="hljs-attribute">type</span>=<span class="hljs-value">{type}</span> 
+          <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{(e)</span> =&gt;</span> {handleChange(e.target.value)}}
+          value={value} /&gt;
+        {errors.map(this.renderErrors.bind(this))}
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

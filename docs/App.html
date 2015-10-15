@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>App.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="FormField.html">
+                  FormField.js
+                </a>
+              
+                
+                <a class="source" href="FormValueViewer.html">
+                  FormValueViewer.js
+                </a>
+              
+                
+                <a class="source" href="App.html">
+                  App.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  index.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>App.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> React, {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> FormField <span class="hljs-keyword">from</span> <span class="hljs-string">'../components/FormField'</span>;
+<span class="hljs-keyword">import</span> FormValueViewer <span class="hljs-keyword">from</span> <span class="hljs-string">'../components/FormValueViewer'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  constructor(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.state = {};
+  }
+  
+  componentWillMount() {
+    <span class="hljs-keyword">const</span> {fields} = <span class="hljs-keyword">this</span>.props;
+    <span class="hljs-keyword">this</span>.setState(fields.reduce((acc, field) =&gt; {
+      acc[field.name] = field;
+      <span class="hljs-keyword">return</span> acc;
+    }, {}));
+  }
+  
+  handleFieldChange(name, value) {
+    <span class="hljs-keyword">this</span>.setState({
+      [name]: <span class="hljs-built_in">Object</span>.assign({}, <span class="hljs-keyword">this</span>.state[name], {value})
+    })
+  }
+  
+  renderFormField(field) {
+    <span class="hljs-keyword">const</span> {validations} = <span class="hljs-keyword">this</span>.props;
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">FormField</span> 
+        <span class="hljs-attribute">key</span>=<span class="hljs-value">{field.name}</span>
+        <span class="hljs-attribute">value</span>=<span class="hljs-value">{this.state[field.name].value}</span>
+        <span class="hljs-attribute">label</span>=<span class="hljs-value">{field.label}</span>
+        <span class="hljs-attribute">validations</span>=<span class="hljs-value">{field.validations.map((validationName)</span> =&gt;</span> {
+          return validations[validationName];
+        })}
+        handleChange={this.handleFieldChange.bind(this, field.name)}
+        type={field.type} /&gt;
+    )</span>;
+  }
+  
+  render() {
+    <span class="hljs-keyword">const</span> fields = <span class="hljs-keyword">this</span>.props.fields.map(<span class="hljs-keyword">this</span>.renderFormField.bind(<span class="hljs-keyword">this</span>));
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"container"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"page-header"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>React EZPZ <span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span>about as simple as it gets<span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"https://github.com/austinpray/react-ezpz"</span>&gt;</span>view sauce<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>{fields}<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">FormValueViewer</span> <span class="hljs-attribute">values</span>=<span class="hljs-value">{this.state}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    )</span>;
+  }
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
