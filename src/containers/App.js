@@ -43,7 +43,10 @@ export default class App extends Component {
       <div className="container">
         <div className="page-header">
           <h1>React EZPZ <small>about as simple as it gets</small></h1>
-          <p><a href="https://github.com/austinpray/react-ezpz">view sauce</a></p>
+          <ul>
+            <li><a href="https://github.com/austinpray/react-ezpz">Fork on GitHub</a></li>
+            <li><a href="docs/">Annotated Sauce</a></li>
+          </ul>
         </div>
         <div>{fields}</div>
         <FormValueViewer values={this.state} />
