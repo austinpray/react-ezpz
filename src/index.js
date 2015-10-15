@@ -11,7 +11,7 @@ const validations = {
   },
   noSpaces: {
     test: function (value) {
-      return !~value.indexOf(" ");
+      return value.includes(" ");
     },
     message: "No Spaces allowed in username"
   }
